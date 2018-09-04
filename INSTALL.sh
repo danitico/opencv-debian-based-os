@@ -56,6 +56,6 @@ sudo make install
 # that we have shared libraries in /usr/local/lib (where the 
 # libraries have been installed
 sudo echo "/usr/local/lib/" > opencv.conf
-ldconfig
+sudo ldconfig
 
 
