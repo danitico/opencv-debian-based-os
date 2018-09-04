@@ -1,5 +1,6 @@
 # Installing required packages for OpenCV via apt-get
 echo "INSTALLING REQUIRED PACKAGES"
+echo "----------------------------"
 sudo apt-get --yes install build-essential cmake git libgtk2.0-dev 'pkg-config' libavcodec-dev libavformat-dev libswscale-dev python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev
 
 if [[ $? > 0 ]]; then
@@ -8,6 +9,8 @@ if [[ $? > 0 ]]; then
 	exit
 fi
 
+echo "Creating the directory which has the source code"
+echo "------------------------------------------------"
 # Creating folder to save source code of OpenCV
 if [ ! -e /home/$USER/OpenCV/ ]; then
 	mkdir /home/$USER/OpenCV/
@@ -21,13 +24,17 @@ cd /home/$USER/OpenCV/
 # Downloading OpenCV's source code
 if [ ! -e opencv.zip ]; then
 	echo "Downloading source code"
+	echo "-----------------------"
 	wget --tries=2 --output-document=opencv.zip -q "https://codeload.github.com/opencv/opencv/zip/3.3.0"
 else
 	rm -rf *
 	echo "Downloading source code"
+	echo "-----------------------"
 	wget --tries=2 --output-document=opencv.zip -q "https://codeload.github.com/opencv/opencv/zip/3.3.0"
 fi
 
+echo "EXTRACTING ZIP"
+echo "--------------"
 # Extracting opencv.zip
 unzip -q opencv.zip
 
@@ -41,15 +48,22 @@ rm -rf opencv-3.3.0/
 mkdir build
 cd build/
 
+echo "RUNNING CMAKE"
+echo "-------------"
 # Running Cmake [PARAMETERS*] path_source_code
 cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTAL_PREFIX=/usr/local ../
 
 # Once we run cmake, we have the files to build OpenCV. In the directory
 # /opencv/build , we run make using threads.
+echo "BUILDING OPENCV"
+echo "---------------"
 make -j6
 
 # When OpenCV is built, we install the libraries of it
+echo "INSTALLING LIBRARIES"
+echo "--------------------"
 sudo make install
+echo "LIBRARIES HAVE BEEN INSTALLED"
 
 # When the libraries have been installed, we have to tell to
 # ldconfig(It configures the dynamic linker run-time bindings)
@@ -57,5 +71,3 @@ sudo make install
 # libraries have been installed
 sudo echo "/usr/local/lib/" > opencv.conf
 sudo ldconfig
-
-
