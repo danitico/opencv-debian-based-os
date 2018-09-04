@@ -71,3 +71,5 @@ echo "LIBRARIES HAVE BEEN INSTALLED"
 # libraries have been installed
 sudo echo "/usr/local/lib/" > opencv.conf
 sudo ldconfig
+
+echo "ALL HAVE BEEN INSTALLED"
