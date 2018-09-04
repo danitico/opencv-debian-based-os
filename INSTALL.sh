@@ -1,17 +1,32 @@
 # Installing required packages for OpenCV via apt-get
 echo "INSTALLING REQUIRED PACKAGES"
-sudo apt-get --yes install build-essential
-sudo apt-get --yes install cmake git libgtk2.0-dev 'pkg-config' libavcodec-dev libavformat-dev libswscale-dev
-sudo apt-get --yes install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev
+sudo apt-get --yes install build-essential cmake git libgtk2.0-dev 'pkg-config' libavcodec-dev libavformat-dev libswscale-dev python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev
+
+if [[ $? > 0 ]]; then
+	echo "It seems that you are having problems with apt-get"
+	echo "Stopping script ..."
+	exit
+fi
 
 # Creating folder to save source code of OpenCV
-mkdir /home/$USER/OpenCV/
+if [ ! -e /home/$USER/OpenCV/ ]; then
+	mkdir /home/$USER/OpenCV/
+else
+	echo "Folder is already created"
+fi
 
 # Moving to OpenCV directory
 cd /home/$USER/OpenCV/
 
 # Downloading OpenCV's source code
-wget --tries=2 --output-document=opencv.zip -q "https://codeload.github.com/opencv/opencv/zip/3.3.0"
+if [ ! -e opencv.zip ]; then
+	echo "Downloading source code"
+	wget --tries=2 --output-document=opencv.zip -q "https://codeload.github.com/opencv/opencv/zip/3.3.0"
+else
+	rm -rf *
+	echo "Downloading source code"
+	wget --tries=2 --output-document=opencv.zip -q "https://codeload.github.com/opencv/opencv/zip/3.3.0"
+fi
 
 # Extracting opencv.zip
 unzip -q opencv.zip
@@ -20,7 +35,7 @@ unzip -q opencv.zip
 cd opencv-3.3.0/
 mv * ../
 cd ../
-rm -rf opencv-3.3.0/ opencv.zip
+rm -rf opencv-3.3.0/
 
 # Creating temporary directory
 mkdir build
@@ -41,6 +56,6 @@ sudo make install
 # that we have shared libraries in /usr/local/lib (where the 
 # libraries have been installed
 sudo echo "/usr/local/lib/" > opencv.conf
-
+ldconfig
 
 
