@@ -3,11 +3,11 @@
 
  - Clone the repository
 
-		git clone https://github.com/danitico/opencv-ubuntu.git
+		git clone https://github.com/danitico/opencv-debian-based-os.git
 
- - Change the permissions of [INSTALL.sh](https://github.com/danitico/opencv-ubuntu/blob/master/INSTALL.sh)
+ - Change the permissions of [INSTALL.sh](https://github.com/danitico/opencv-debian-based-os/blob/master/INSTALL.sh)
 
-		cd OpenCV/
+		cd opencv-debian-based-os/
 		chmod u+x INSTALL.sh
 
  - Execute it!
@@ -24,4 +24,4 @@
 
 # LICENSE
 
-Licensed under [MIT](https://github.com/danitico/opencv-ubuntu/blob/master/LICENSE.md)
+Licensed under [MIT](https://github.com/danitico/opencv-debian-based-os/blob/master/LICENSE.md)
