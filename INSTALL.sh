@@ -1,7 +1,7 @@
 # Installing required packages for OpenCV via apt-get
 echo "INSTALLING REQUIRED PACKAGES"
 echo "----------------------------"
-sudo apt-get --yes install build-essential cmake git libgtk2.0-dev 'pkg-config' libavcodec-dev libavformat-dev libswscale-dev python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev
+sudo apt-get --yes install build-essential cmake git libgtk2.0-dev 'pkg-config' libavcodec-dev libavformat-dev libswscale-dev python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev gcc-multilib g++-multilib
 
 if [[ $? > 0 ]]; then
 	echo "It seems that you are having problems with apt-get"
@@ -27,15 +27,12 @@ if [ ! -e opencv.zip ]; then
 	echo "-----------------------"
 	wget --tries=2 --output-document=opencv.zip -q "https://codeload.github.com/opencv/opencv/zip/3.3.0"
 else
-	rm -rf *
-	echo "Downloading source code"
-	echo "-----------------------"
-	wget --tries=2 --output-document=opencv.zip -q "https://codeload.github.com/opencv/opencv/zip/3.3.0"
+	find . ! -name 'opencv.zip' -exec rm -rf {} + 2> /dev/null
 fi
 
+# Extracting opencv.zip quietly
 echo "EXTRACTING ZIP"
 echo "--------------"
-# Extracting opencv.zip
 unzip -q opencv.zip
 
 # Erasing useless directory and zip file
@@ -67,8 +64,10 @@ echo "LIBRARIES HAVE BEEN INSTALLED"
 
 # When the libraries have been installed, we have to tell to
 # ldconfig(It configures the dynamic linker run-time bindings)
-# that we have shared libraries in /usr/local/lib (where the 
+# that we have shared libraries in /usr/local/lib (where the
 # libraries have been installed
+echo "RUNNING LDCONFIG"
+echo "----------------"
 sudo echo "/usr/local/lib/" > opencv.conf
 sudo ldconfig
 
