@@ -12,15 +12,15 @@ fi
 echo "Creating the directory which has the source code"
 echo "------------------------------------------------"
 # Creating folder to save source code of OpenCV
-if [ ! -e /home/$USER/OpenCV/ ]; then
-	mkdir /home/$USER/OpenCV/
+if [ ! -e /home/$USER/apps/OpenCV/ ]; then
+	mkdir /home/$USER/apps/OpenCV/
 else
 	echo "Folder is already created"
-	rm -rf /home/$USER/OpenCV/*
+	rm -rf /home/$USER/apps/OpenCV/*
 fi
 
 # Moving to OpenCV directory
-cd /home/$USER/OpenCV/
+cd /home/$USER/apps/OpenCV/
 
 # Downloading OpenCV's source code
 if [ ! -e opencv.zip ]; then
