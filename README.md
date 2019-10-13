@@ -5,12 +5,7 @@
 
 		git clone https://github.com/danitico/opencv-debian-based-os.git
 
- - Change the permissions of [INSTALL.sh](https://github.com/danitico/opencv-debian-based-os/blob/master/INSTALL.sh)
-
-		cd opencv-debian-based-os/
-		chmod u+x INSTALL.sh
-
- - Execute it!
+  - Execute it!
 
 		./INSTALL.sh
 
